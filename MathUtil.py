@@ -90,3 +90,21 @@ def nChooseK(n, k):
     for i in range(1, n - k + 1):
         denominator *= i
     return numerator / denominator
+    
+def argmax(target, candidates, method):
+    optimalIndex, optimalDistance = 0, -sys.maxsize
+    for i in range(len(candidates)):
+        distance = method(target, candidates[i])
+        if distance > optimalDistance:
+            optimalDistance = distance
+            optimalIndex = i
+    return optimalIndex
+    
+def argmin(target, candidates, method):
+    optimalIndex, optimalDistance = 0, sys.maxsize
+    for i in range(len(candidates)):
+        distance = method(target, candidates[i])
+        if distance < optimalDistance:
+            optimalDistance = distance
+            optimalIndex = i
+    return optimalIndex
