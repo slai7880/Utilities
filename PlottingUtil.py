@@ -89,9 +89,9 @@ def makeHistogramPlot(data, title,\
     if xTickLabels is None:
         xTickLabels = [i for i in range(len(data))]
     if yTickLabels is None:
-        yTickLabels = [i for i in range(0, max(data), 100)]
+        yTickLabels = [i for i in range(0, int(np.ceil(max(data))), 100)]
     xticks = np.arange(len(data))
-    yticks = np.arange(0, max(data), 100)
+    yticks = np.arange(0, int(np.ceil(max(data))), 100)
     fig, ax = plt.subplots(figsize = figsize, dpi = dpi)
     ax.bar(xticks, data)
     for i in range(len(data)):
