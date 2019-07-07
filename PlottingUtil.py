@@ -268,7 +268,7 @@ def makeMultibarPlot(data, colors, title, labels = None,\
         multiplier *= -1
     w.sort()
     for i in range(data.shape[0]):
-        ax.bar(X + w[i], data[i, :], color = colors[i], width = width, label = labels[i])
+        ax.bar(X + w[i], np.squeeze(np.array(data[i, :])), color = colors[i], width = width, label = labels[i])
     # If there are multiple figures and the legends need to be fixed across them,
     # the handles and figLabels of the figure must be set manually starting with the
     # following code. Note that this is incomplete, please refer to the official
