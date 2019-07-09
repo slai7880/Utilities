@@ -217,7 +217,7 @@ def makeStackedBarPlot(data, colors, title, labels = None,\
     
 def makeMultibarPlot(data, colors, title, labels = None,\
                     xTickLabels = None, yTickLabels = None,\
-                    xLabel = "", yLabel = "", width = 0.05, figsize = (8, 6), dpi = 100,\
+                    xLabel = "", yLabel = "", width = 0.05, gapMultiplier = 1, figsize = (8, 6), dpi = 100,\
                     text = True):
     """
     Creates a multi-bar plot.
@@ -253,7 +253,7 @@ def makeMultibarPlot(data, colors, title, labels = None,\
     X = np.array([i for i in range(data.shape[1])])
 
     w = []
-    gap = width * 2
+    gap = width * gapMultiplier
     multiplier = -1
     if data.shape[0] % 2 == 0:
         w = [-gap / 2, gap / 2]
