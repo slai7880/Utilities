@@ -243,7 +243,7 @@ def makeMultibarPlot(data, colors, title, labels = None,\
         The objects of matplotlib.pyplot figure.
     """
     assert data.shape[0] == len(colors)
-    if labels is None:
+    if labels is None and data.shape[0] > 1:
         labels = ["Class " + str(i) for i in range(data.shape[0])]
     if xTickLabels is None:
         xTickLabels = [i for i in range(data.shape[1])]
@@ -277,7 +277,8 @@ def makeMultibarPlot(data, colors, title, labels = None,\
     newFigHandles = figHandles
     newFigLabels = figLabels
     
-    ax.legend(newFigHandles, newFigLabels, fontsize = 12)
+    if not labels is None:
+        ax.legend(newFigHandles, newFigLabels, fontsize = 12)
     ax.set_title(title, fontsize = 12, pad = 20, fontweight = "bold")
     ax.set_xticks(X)
     ax.set_xticklabels(xTickLabels)
