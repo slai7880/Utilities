@@ -2,6 +2,7 @@ import numpy as np
 import os, sys
 import random
 from copy import deepcopy
+import bisect
 
 def gcd(a, b, recursion = True):
     """
@@ -108,3 +109,20 @@ def argmin(target, candidates, method):
             optimalDistance = distance
             optimalIndex = i
     return optimalIndex
+
+class WeightedRandomPick:
+    """Given a list of positive integers as weights, randomly
+    picks an index of the list based on the weights.
+    """
+    def __init__(self, weights):
+        assert not weights is None and len(weights) > 0
+        for i in range(len(weights)):
+            assert weights[i] >= 0 and int(weights[i]) == weights[i]
+        self.accumulated = [0] * len(weights)
+        self.accumulated[0] = weights[0]
+        for i in range(1, len(weights)):
+            self.accumulated[i] = self.accumulated[i - 1] + weights[i]
+    
+    def pickIndex(self):
+        target = random.randint(1, self.accumulated[-1])
+        return bisect.bisect_left(self.accumulated, target)
