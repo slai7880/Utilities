@@ -110,7 +110,7 @@ def argmin(target, candidates, method):
             optimalIndex = i
     return optimalIndex
 
-class WeightedRandomPick:
+class WeightedRandomSelector:
     """Given a list of positive integers as weights, randomly
     picks an index of the list based on the weights.
     """
