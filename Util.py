@@ -7,6 +7,8 @@ import numpy as np
 import os, sys
 import random
 from copy import deepcopy
+import datetime
+import pandas
  
 #============================== Matrix =============================#
 
@@ -132,7 +134,7 @@ def mergeDictionaries(dictionaries, silenceMode = True):
     return result
     
 #========================== End of Section =========================#
-#========================== Transformation =========================#
+#======================== Data Transformation ======================#
 
 def categorize(L):
     count = 0
@@ -164,5 +166,43 @@ def getBinaryVectors(L, rangeTuple = None):
     for i in range(len(L)):
         result[i, L[i] - m] = 1
     return result
+
+#========================== End of Section =========================#
+#======================== Time Representation ======================#
+
+def getCurrentDatetimeString():
+    """
+    Obtain a string representation of current date and time.
+    """
+    currentDT = datetime.datetime.now()
+    year, month, day =\
+        str(currentDT.year), str(currentDT.month), str(currentDT.day)
+    hour, minute, second =\
+        str(currentDT.hour), str(currentDT.minute), str(currentDT.second)
+    hour, minute, second
+    if len(month) == 1:
+        month = "0" + month
+    if len(day) == 1:
+        day = "0" + day
+    if len(hour) == 1:
+        hour = "0" + hour
+    if len(minute) == 1:
+        minute = "0" + minute
+    if len(second) == 1:
+        second = "0" + second
+    return month + day + year + hour + minute + second
+
+#========================== End of Section =========================#
+#========================= Pandas DataFrame ========================#
+
+def dropRows(df, toDropList, inplace = True):
+    if inplace:
+        df.drop(df.index[toDropList], inplace = True)
+    else:
+        return df.drop(df.index[toDropList])
+    return None
+
+def shuffleRows(df):
+    return df.sample(frac = 1).reset_index(drop = True)
 
 #========================== End of Section =========================#
