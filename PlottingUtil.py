@@ -9,7 +9,8 @@ from mpl_toolkits.axes_grid1 import make_axes_locatable
 def makeMatrixPlot(M, title,\
                 xTickLabels = None, yTickLabels = None,\
                 xLabel = "", yLabel = "",\
-                threshold = "auto", cmap = plt.cm.Blues, figsize = (8, 6), dpi = 100,\
+                threshold = "auto", cmap = plt.cm.Blues, vmin = None, vmax = None,\
+                figsize = (8, 6), dpi = 100,\
                 integer = True):
     """
     Creates a 2D plot of a numpy matrix.
@@ -38,7 +39,7 @@ def makeMatrixPlot(M, title,\
     if yTickLabels is None:
         yTickLabels = [i for i in range(M.shape[0])]
     fig, ax = plt.subplots(figsize = figsize, dpi = dpi)
-    im = ax.imshow(M, interpolation = "nearest", cmap = cmap)
+    im = ax.imshow(M, interpolation = "nearest", cmap = cmap, vmin = vmin, vmax = vmax)
     divider = make_axes_locatable(ax)
     cax = divider.append_axes("right", size = "5%", pad = 0.05)
     ax.figure.colorbar(im, cax = cax)
