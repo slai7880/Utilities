@@ -63,7 +63,7 @@ def makeMatrixPlot(M, title,\
 def makeHistogramPlot(data, title,\
                     xTickLabels = None, yTickLabels = None,\
                     xLabel = "", yLabel = "",figsize = (8, 6), dpi = 100,\
-                    integer = True):
+                    text = True, integer = True):
     """
     Creates a histogram plot.
     Parameters
@@ -95,11 +95,12 @@ def makeHistogramPlot(data, title,\
     yticks = np.arange(0, int(np.ceil(max(data))), 100)
     fig, ax = plt.subplots(figsize = figsize, dpi = dpi)
     ax.bar(xticks, data)
-    for i in range(len(data)):
-        text = str(data[i])
-        if integer:
-            text = str(int(data[i]))
-        ax.text(xticks[i], data[i], text, ha = "center", va = "bottom")
+    if text:
+        for i in range(len(data)):
+            text = str(data[i])
+            if integer:
+                text = str(int(data[i]))
+            ax.text(xticks[i], data[i], text, ha = "center", va = "bottom")
     ax.set(xticks = xticks, yticks = yticks, xticklabels = xTickLabels, yticklabels = yTickLabels,\
             title = title, xlabel = xLabel, ylabel = yLabel)
     fig.tight_layout()
@@ -214,6 +215,8 @@ def makeStackedBarPlot(data, colors, title, labels = None,\
     ax.set_title(title, fontsize = 12, pad = 20, fontweight = "bold")
     ax.set_xticks(X)
     ax.set_xticklabels(xTickLabels)
+    ax.set_xlabel(xLabel)
+    ax.set_ylabel(yLabel)
     return fig, ax
     
 def makeMultibarPlot(data, colors, title, labels = None,\
@@ -290,5 +293,7 @@ def makeMultibarPlot(data, colors, title, labels = None,\
     ax.set_title(title, fontsize = 12, pad = 20, fontweight = "bold")
     ax.set_xticks(X)
     ax.set_xticklabels(xTickLabels)
+    ax.set_xlabel(xLabel)
+    ax.set_ylabel(yLabel)
     return fig, ax
     
